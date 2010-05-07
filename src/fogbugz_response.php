@@ -30,7 +30,6 @@ class FogBugz_Response {
 	function __construct($document) {
 		$this->_document = $document;
 		$this->_data = $this->toArray(null);
-		print_r($this->_data);
 	}
 
 	protected function toArray($node = null) {
@@ -44,7 +43,7 @@ class FogBugz_Response {
 		}
 		$data = array();
 		foreach($node->childNodes as $childNode) {
-			if ( $childNode->nodeType == XML_TEXT_NODE && $node->childNodes->length == 1) {
+			if ( ( $childNode->nodeType == XML_TEXT_NODE || $childNode->nodeType == XML_CDATA_SECTION_NODE) && $node->childNodes->length == 1) {
 				return $childNode->nodeValue;
 			} else if ( $childNode->nodeType != XML_TEXT_NODE) {
 				$result = $this->toArray($childNode);

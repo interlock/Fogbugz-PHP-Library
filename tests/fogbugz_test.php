@@ -14,12 +14,18 @@ class FogBugzTest extends UnitTestCase {
 	}
 
 	function tearDown() {
+		$this->fb->logoff();
 		unset($this->fb);
 	}
 
-	function testLoginSuccess() {
-		$response = $this->fb->login();
-		assertIsA($response,'FogBugz_Response_Token');
+	function testLogonSuccess() {
+		$response = $this->fb->logon();
+		$this->assertIsA($response,'FogBugz_Response_Token');
+	}
+
+	function testLogoff() {
+		$this->fb->logon();
+		$this->assertTrue($this->fb->logoff());
 	}
 
 }

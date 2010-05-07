@@ -24,12 +24,15 @@ class FogBugz_Request {
 
 	function go() {
 		$url = $this->_constructUrl();
+		if (true && !empty($this->_params)) {
+			$url = sprintf("%s?%s",$url,http_build_query($this->_params));
+		}
 		$ch = curl_init($url);
 		curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
-		if (!empty($this->_params)) {
+		if (false) {
 			curl_setopt($ch,CURLOPT_POST,true);
 			curl_setopt($ch,CURLOPT_POSTFIELDS,$this->_params);
-		}
+		} 
 		$result = curl_exec($ch);
 		$info = curl_getinfo($ch);
 		if (curl_error($ch) != "") {
