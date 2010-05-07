@@ -26,17 +26,20 @@ class FogBugz_Request {
 		$url = $this->_constructUrl();
 		$ch = curl_init($url);
 		curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
-		curl_setopt($ch,CURLOPT_POSt,true);
-		curl_setopt($ch,CURLOPT_POSTFIELDS,$this->_params);
-		$result = curl_exec($ch);
-		$info = curl_info($ch);
-		if ($info['http_code'] != "200") {
-			Throw new FogBugzException("Error fetching request, was expecting HTTP 200 code");
+		if (!empty($this->_params)) {
+			curl_setopt($ch,CURLOPT_POST,true);
+			curl_setopt($ch,CURLOPT_POSTFIELDS,$this->_params);
 		}
+		$result = curl_exec($ch);
+		$info = curl_getinfo($ch);
 		if (curl_error($ch) != "") {
 			Throw new FogBugzException(sprintf("Error fetching request, curl got error: %s",curl_error($ch)));
 		}
-		return FogBugz_Response::parse($result);
+
+		if ($info['http_code'] != "200") {
+			Throw new FogBugzException(sprintf("Error fetching request, was expecting HTTP 200 code, got %s instead",$info['http_code']));
+		}
+		return FogBugz_Response::create($result);
 	} 
 
 	function _constructUrl() {
