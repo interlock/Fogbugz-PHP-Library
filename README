@@ -1,0 +1,19 @@
+FogBugz API Library for PHP
+
+Based on the specs from: http://www.fogcreek.com/FogBugz/docs/70/topics/advanced/API.html
+
+Install:
+
+1. Copy src directory to an accessible path for your PHP application.
+
+Usage:
+
+1. import 'fogbugz_init.php';
+2. Create instance of FogBugz class.
+3. Enjoy.
+
+Todo:
+
+* Complete implementation of all response objects and their unit tests
+* only post the changes to objects (dirty field tracking)
+* Add PHP Doc code to generate API docs
