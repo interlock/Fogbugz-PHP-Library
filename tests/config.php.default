@@ -1,0 +1,7 @@
+<?php
+
+$fogbugz_url = 'http://yourfogbugz.install.com';
+$fogbugz_login = 'my@email.com';
+$fogbugz_password = 'a password';
+
+?>
