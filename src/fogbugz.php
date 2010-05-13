@@ -18,7 +18,7 @@ class FogBugz {
 		$request->setAccessor("api.xml");
 		$response = $request->go();
 		if (get_class($response) != 'FogBugz_Response_Api') {
-			Throw new FogBugzException('Fogbugz->Login did not receive Api response');
+			Throw new FogBugz_Exception('Fogbugz->Login did not receive Api response');
 		}
 		// verify API version we're working with
 		// actually logon now
@@ -26,7 +26,7 @@ class FogBugz {
 		$request->setParams(array('cmd'=>'logon','email'=>$this->_logon,'password'=>$this->_password));
 		$response = $request->go();
 		if (get_class($response) != 'FogBugz_Response_Token') {
-			Throw new FogBugzException('FogBugz->Login did not receive Token response');
+			Throw new FogBugz_Exception('FogBugz->Login did not receive Token response');
 		}
 		$this->_token = $response;
 		return $response;
@@ -35,7 +35,7 @@ class FogBugz {
 	function logoff() {
 		if (!empty($this->_token)) {
 			$request = new FogBugz_Request($this);
-			$request->setParams(array('cmd'=>'logff','token'=>$this->_token->_data['token']));
+			$request->setParams(array('cmd'=>'logoff','token'=>$this->_token->_data['token']));
 			$response = $request->go();
 			if (get_class($response) != 'FogBugz_Response_Empty') {
 				return false;
@@ -44,6 +44,13 @@ class FogBugz {
 		}
 		print_r($this->_token);
 		return false;
+	}
+
+	function getFilters() {
+		$request = new FogBugz_Request($this);
+		$request->setParams(array('cmd'=>'listFilters','token'=>$this->_token->_data['token']));
+		$response = $request->go();
+		return $response;
 	}
 
 	function getUrl() {

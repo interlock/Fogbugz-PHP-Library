@@ -1,6 +1,6 @@
 <?php
 
-class FogBugzException extends Exception {
+class FogBugz_Exception extends Exception {
 
 }
 

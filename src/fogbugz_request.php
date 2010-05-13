@@ -10,7 +10,7 @@ class FogBugz_Request {
 		if (is_object($fogbugz) && get_class($fogbugz) == "FogBugz") {
 			$this->_fogbugz = $fogbugz;
 		} else {
-			Throw new FogBugzException("Invalid Object Passed, Was Expecting Class Fogbugz");
+			Throw new FogBugz_Exception("Invalid Object Passed, Was Expecting Class Fogbugz");
 		}
 	}
 
@@ -36,11 +36,11 @@ class FogBugz_Request {
 		$result = curl_exec($ch);
 		$info = curl_getinfo($ch);
 		if (curl_error($ch) != "") {
-			Throw new FogBugzException(sprintf("Error fetching request, curl got error: %s",curl_error($ch)));
+			Throw new FogBugz_Exception(sprintf("Error fetching request, curl got error: %s",curl_error($ch)));
 		}
 
 		if ($info['http_code'] != "200") {
-			Throw new FogBugzException(sprintf("Error fetching request, was expecting HTTP 200 code, got %s instead",$info['http_code']));
+			Throw new FogBugz_Exception(sprintf("Error fetching request, was expecting HTTP 200 code, got %s instead",$info['http_code']));
 		}
 		return FogBugz_Response::create($result);
 	} 

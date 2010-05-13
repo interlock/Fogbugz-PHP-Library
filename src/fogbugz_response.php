@@ -60,7 +60,7 @@ class FogBugz_Response {
 		$xp = new DOMXPath($document);
 		$response = $xp->query("//response");
 		if ($response->length !== 1) {
-			Throw new FogBugzException("XML response was missing <response> tag");
+			Throw new FogBugz_Exception("XML response was missing <response> tag");
 		}
 		// test for special case "empty" response
 		$response = $xp->query("//response/*");
@@ -72,12 +72,12 @@ class FogBugz_Response {
 		foreach(FogBugz_Response::$mapping as $xpath => $result_class) {
 			$response = $xp->query($xpath);
 			if ($response->length > 0) {
-				return new ${result_class}($document);
+				return new $result_class($document);
 			}
 		}
 		// missing definition
 		// TODO: make this error more specific
-		Throw new FogBugzException("Missing Handler for Response");
+		Throw new FogBugz_Exception("Missing Handler for Response");
 	}
 }
 

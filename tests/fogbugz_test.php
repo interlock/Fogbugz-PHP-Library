@@ -28,4 +28,9 @@ class FogBugzTest extends UnitTestCase {
 		$this->assertTrue($this->fb->logoff());
 	}
 
+	function testGetFilters() {
+		$this->fb->logon();
+		$result = $this->fb->getFilters();
+		$this->assertIsA($result,'FogBugz_Response_Filters');
+	}
 }
