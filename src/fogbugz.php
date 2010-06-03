@@ -49,8 +49,30 @@ class FogBugz {
 	function getFilters() {
 		$request = new FogBugz_Request($this);
 		$request->setParams(array('cmd'=>'listFilters','token'=>$this->_token->_data['token']));
-		$response = $request->go();
-		return $response;
+		return $request->go();
+	}
+
+	function setFilter($sFilter) {
+		Throw new FogBugz_Exception("setFilter not implemented");
+	}
+
+	function search($q=null,$cols=null,$max=null) {
+		$request = new FogBugz_Request($this);
+		$params = array(
+			'token' => $this->_token->_data['token'],
+			'cmd' => 'search'
+		);
+		if (!empty($q)) {
+			$params['q'] = $q;
+		}
+		if (!empty($cols)) {
+			$params['cols'] = $cols;
+		}
+		if (!empty($max) && is_numeric($max)) {
+			$params['max'] = $max;
+		}
+		$request->setParams($params);
+		return $request->go();
 	}
 
 	function getUrl() {

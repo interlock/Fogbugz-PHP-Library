@@ -6,7 +6,8 @@ require_once('config.php');
 class AllTests extends TestSuite {
 
 	var $tests = array(
-		'fogbugz'
+		'fogbugz',
+		'fogbugz_search'
 	);
 
 	function AllTests() {

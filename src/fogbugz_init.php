@@ -12,7 +12,9 @@ $response_classes = array(
 	'api',
 	'token',
 	'filters',
-	'filter'
+	'filter',
+	'cases',
+	'case'
 );
 foreach($response_classes as $response_class) {
 	require_once(sprintf("fogbugz_response_%s.php",$response_class));

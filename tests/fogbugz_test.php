@@ -4,7 +4,7 @@ require_once('../src/fogbugz_init.php');
 
 class FogBugzTest extends UnitTestCase {
 
-	private $fb = null;
+	protected $fb = null;
 
 	function setUp() {
 		global $fogbugz_url,$fogbugz_login,$fogbugz_password;
@@ -33,4 +33,6 @@ class FogBugzTest extends UnitTestCase {
 		$result = $this->fb->getFilters();
 		$this->assertIsA($result,'FogBugz_Response_Filters');
 	}
+
 }
+?>
