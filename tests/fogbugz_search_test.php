@@ -23,4 +23,11 @@ class FogBugzSearchTest extends FogBugzTest {
 		$this->assertEqual(count($result->_data),1);
 	}
 
+	function testSearchEvents() {
+		$this->fb->logon();
+		$result = $this->fb->search(null,'events',1);
+		$this->assertTrue(isset($result->_data[0]->_data['events']));
+		$this->assertNotEqual(count($result->_data[0]->_data['events']->_data),0);
+	}
+
 }

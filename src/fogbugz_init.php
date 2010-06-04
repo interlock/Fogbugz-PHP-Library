@@ -14,7 +14,9 @@ $response_classes = array(
 	'filters',
 	'filter',
 	'cases',
-	'case'
+	'case',
+	'events',
+	'event'
 );
 foreach($response_classes as $response_class) {
 	require_once(sprintf("fogbugz_response_%s.php",$response_class));

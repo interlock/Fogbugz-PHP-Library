@@ -25,7 +25,11 @@ class FogBugz_Response_Case extends FogBugz_Response {
 
 		if ($node->childNodes->length != 0 ) {
 			foreach ($node->childNodes as $childNode) {
-				$data[$childNode->nodeName] = $childNode->textContent;
+				if ($childNode->nodeName == 'events') {
+					$data['events'] = new FogBugz_Response_Events($childNode);
+				} else {
+					$data[$childNode->nodeName] = $childNode->textContent;
+				}
 			}
 			$this->shallow = false;
 		}
