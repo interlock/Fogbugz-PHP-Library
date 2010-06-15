@@ -7,7 +7,8 @@ class AllTests extends TestSuite {
 
 	var $tests = array(
 		'fogbugz',
-		'fogbugz_search'
+		'fogbugz_search',
+		'fogbugz_filter'
 	);
 
 	function AllTests() {
