@@ -53,7 +53,9 @@ class FogBugz {
 	}
 
 	function setFilter($sFilter) {
-		Throw new FogBugz_Exception("setFilter not implemented");
+		$request = new Fogbugz_Request($this);
+		$request->setParams(array('cmd'=>'setCurrentFilter','sFilter'=>$sFilter,'token'=>$this->_token->_data['token']));
+		return $request->go();
 	}
 
 	function search($q=null,$cols=null,$max=null) {

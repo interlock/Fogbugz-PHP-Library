@@ -14,8 +14,7 @@ class FogBugz_Response_Filters extends FogBugz_Response {
 		$data = array();
 		foreach($node->childNodes as $childNode) {
 			if ( ($childNode->nodeName == 'filter') ) {
-				$filter = new FogBugz_Response_Filter($childNode);
-				$this->_data[] = $filter;
+				$data[] = new FogBugz_Response_Filter($childNode);
 			}
 		}
 		return $data;

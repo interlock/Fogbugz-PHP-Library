@@ -25,7 +25,7 @@ class FogBugz_Response_Filter extends FogBugz_Response {
 				Throw new FogBugz_Exception("Missing filter attribute sFilter");
 			}
 			if ($this->_document->hasAttribute('status')) {
-				$this->_status = $this->_document->getAttribute('current');
+				$this->_status = $this->_document->getAttribute('status');
 			}
 			if ($this->_document->hasChildNodes()) {
 				$this->_name = $this->_document->textContent;
